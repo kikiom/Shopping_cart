@@ -1,0 +1,3 @@
+22;apple;5.99;54;chervena
+23;apple;6.99;48;zelena
+24;banana;7.99;70;zrql v egiped

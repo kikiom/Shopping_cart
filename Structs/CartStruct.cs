@@ -11,24 +11,18 @@ namespace Shopping_cart
     {
         private int _id;
         private int _quantity;
-        private double _price;
-        private string _name;
+        private int _id_product;
 
-        public CartStruct(int id, int quantity, ProductStruct product)
+        public CartStruct(int id, int quantity, int id_product)
         {
             _id = id;
             _quantity = quantity;
-            _name = product.GetName();
-            _price = product.GetPrice();
+            _id_product = id_product;
         }
 
-        public double GetPrice()
+        public int GetIdProduct()
         {
-            return _price;
-        }
-        public string GetName()
-        {
-            return _name;
+            return _id_product;
         }
         public int GetId()
         {
@@ -42,9 +36,13 @@ namespace Shopping_cart
         {
             _quantity = quantity;
         }
+        public void SetId(int id)
+        {
+            _id = id;
+        }
         public string ToString()
         {
-            return _id + " " + _name + " " + _quantity + " " + _price + "\n";
+            return _id + " " + _quantity ;
         }
     }
 }

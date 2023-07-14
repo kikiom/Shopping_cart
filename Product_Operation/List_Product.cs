@@ -1,21 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Shopping_cart.Product_Operation
 {
-    internal class List_Product : IOperation
+    internal class List_Product : IOperation, IPruductOperation
     {
-        public void bat()
+        private string _name = "list_products";
+        public string GetName()
         {
-            
+            return _name;
+        }
+        public void Bat(ref List<ProductStruct> products, string data)
+        {
+            foreach (ProductStruct product in products)
+            {
+                Console.WriteLine(product.ToString());
+            }
         }
 
         public string print()
         {
-            return "listproduct - shows all products\n";
+            return "list_products - shows all products";
         }
     }
 }

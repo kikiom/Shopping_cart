@@ -9,6 +9,7 @@ namespace Shopping_cart
     internal interface IOperation
     {
         string print();
-        void bat();
+        string GetName();
+       
     }
 }

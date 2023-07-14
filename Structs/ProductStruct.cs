@@ -17,6 +17,11 @@
             _description = description;
 
         }
+
+        public ProductStruct()
+        {
+        }
+
         public double GetPrice()
         {
             return _price;
@@ -55,7 +60,7 @@
         }
         public string ToString()
         {
-            return _id + " " + _name + " " + _quantity + " " + _price + " " + _description + "\n" ;
+            return _id + ";" + _name + ";" + _price + ";" + _quantity + ";" + _description;
         }
     }
 }

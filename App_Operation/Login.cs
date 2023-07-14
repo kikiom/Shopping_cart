@@ -1,21 +1,33 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Shopping_cart.Interface;
+using System;
 
 namespace Shopping_cart.App_Operation
 {
-    internal class Login : IOperation
+    internal class Login : IAppOperation
     {
-        public void bat()
+        private string _name = "login";
+
+        public void Bat(string data)
         {
-            throw new NotImplementedException();
+            switch (data)
+            {
+                case "admin": 
+                    Admin admin = new Admin(); 
+                    admin.Run(); 
+                    break;
+                case "client": 
+                    Client client = new Client(); 
+                    client.Run(); 
+                    break;
+                default: 
+                    Console.WriteLine("Incorrect type of user"); 
+                    break;
+            }
         }
 
-        public string print()
+        public string GetName()
         {
-            throw new NotImplementedException();
+            return _name;
         }
     }
 }
