@@ -15,9 +15,9 @@ namespace Shopping_cart.Cart_Operation
             char[] separator = { ';' };
             string[] sub = data.Split(separator, StringSplitOptions.RemoveEmptyEntries);
             //sub0 = id_item    sub1 = id_product    sub2 = quantity 
-            int id_item = int.Parse(sub[0]);
-            int id_product = int.Parse(sub[1]);
-            int quantity = int.Parse(sub[2]);
+            int id_item = int.Parse(sub[0].Trim());
+            int id_product = int.Parse(sub[1].Trim());
+            int quantity = int.Parse(sub[2].Trim());
             ProductStruct product = new ProductStruct();
             foreach (ProductStruct item in products)
             {

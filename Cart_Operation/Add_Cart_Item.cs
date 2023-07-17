@@ -17,8 +17,8 @@ namespace Shopping_cart.Cart_Operation
             string[] sub = data.Split(separator, StringSplitOptions.RemoveEmptyEntries);
             //sub0 = id_product    sub1 = quantity 
             int id_item =cart_items.Count;
-            int id_product = int.Parse(sub[0]);
-            int quantity = int.Parse(sub[1]);
+            int id_product = int.Parse(sub[0].Trim());
+            int quantity = int.Parse(sub[1].Trim());
             ProductStruct product = new ProductStruct();
             foreach(ProductStruct item in products) 
             { 

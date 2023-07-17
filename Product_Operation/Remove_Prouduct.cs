@@ -12,7 +12,7 @@ namespace Shopping_cart.Product_Operation
             foreach (ProductStruct product in list)
             {
                 
-                if (product.GetId() == int.Parse(data))
+                if (product.GetId() == int.Parse(data.Trim()))
                 {
                     index = i;
                 }

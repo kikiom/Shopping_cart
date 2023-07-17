@@ -15,7 +15,7 @@ namespace Shopping_cart
             char[] separators = new char[] { '(', ')' };
 
             string[] subs = input.Split(separators, StringSplitOptions.RemoveEmptyEntries);
-            command = subs[0];
+            command = subs[0].Trim();
             if (subs.Length > 1 ) 
             {
                 data = subs[1];

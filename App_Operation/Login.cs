@@ -9,7 +9,7 @@ namespace Shopping_cart.App_Operation
 
         public void Bat(string data)
         {
-            switch (data)
+            switch (data.Trim())
             {
                 case "admin": 
                     Admin admin = new Admin(); 

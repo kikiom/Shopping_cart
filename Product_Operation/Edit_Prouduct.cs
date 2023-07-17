@@ -15,15 +15,15 @@ namespace Shopping_cart.Product_Operation
             char[] separator = { ';' };
             string[] sub = data.Split(separator, StringSplitOptions.RemoveEmptyEntries);
             //sub0 = id     sub1 = name     sub2 = price    sub3 = quantity     sub4 = description
-            int id = int.Parse(sub[0]);
+            int id = int.Parse(sub[0].Trim());
             foreach (ProductStruct product in products)
             {
                 if (product.GetId() == id)
                 {
-                    product.SetName(sub[1]);
-                    product.SetPrice(double.Parse(sub[2]));
-                    product.SetQuantity(int.Parse(sub[3]));
-                    product.SetDescription(sub[4]);
+                    product.SetName(sub[1].Trim());
+                    product.SetPrice(double.Parse(sub[2].Trim()));
+                    product.SetQuantity(int.Parse(sub[3].Trim()));
+                    product.SetDescription(sub[4].Trim());
                 }
             }
             Save_Prouduct save = new Save_Prouduct();

@@ -34,7 +34,7 @@ namespace Shopping_cart.Product_Operation
             {
                 id = 0;
             }
-            ProductStruct product = new ProductStruct(id, int.Parse(sub[2]), double.Parse(sub[1]), sub[0], sub[3]);
+            ProductStruct product = new ProductStruct(id, int.Parse(sub[2].Trim()), double.Parse(sub[1].Trim()), sub[0].Trim(), sub[3].Trim());
             products.Add(product);
             Save_Prouduct save = new Save_Prouduct();
             save.ExportToTextFile(products);

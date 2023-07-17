@@ -17,7 +17,7 @@ namespace Shopping_cart.Product_Operation
         {
             foreach (ProductStruct product in products) 
             {
-                if (product.GetName()==data)
+                if (product.GetName()==data.Trim())
                 {
                     Console.WriteLine("product " + data + " id is " + product.GetId());
                 }

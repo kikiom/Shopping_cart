@@ -15,6 +15,7 @@ namespace Shopping_cart
             Save_Prouduct save = new Save_Prouduct();
             Data data = new Data();
             Help help = new Help();
+
             List<IOperation> admin_operations = data.GetAdminOperation();
             List<IOperation> client_operations = data.GetClientOperation();
             List<IAppOperation> app_operations = data.GetAppOperation();
@@ -22,28 +23,15 @@ namespace Shopping_cart
             all_operations.AddRange(admin_operations);
             all_operations.AddRange(client_operations);
             List<ProductStruct> products = new List<ProductStruct>();
+            List<CartStruct>  carts = new List<CartStruct>();
+
             read.ReadFromFile(ref products, "C:\\Users\\zlati\\Source\\Repos\\Shopping_cart\\save.txt");
             string command = null;
             string info = null;
+
             do
             {
                 read.ReadFromTerminal(ref command, ref info);
-                foreach (IOperation operation in admin_operations)
-                {
-                    if (operation.GetName() == command)
-                    {
-                        IPruductOperation pruductOperation = (IPruductOperation)operation;
-                        pruductOperation.Bat(ref products, info);
-                    }
-                }
-                /*foreach (IOperation operation in client_operations)
-                {
-                    if (operation.GetName() == command)
-                    {
-                        ICartOperation pruductOperation = (ICartOperation)operation;
-                        pruductOperation.Bat(ref products, info);
-                    }
-                }*/
                 foreach (IAppOperation operation in app_operations)
                 {
                     if (operation.GetName() == command)
