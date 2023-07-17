@@ -6,17 +6,18 @@ namespace Shopping_cart.App_Operation
     internal class Login : IAppOperation
     {
         private string _name = "login";
-
+        private Client client = new Client();
+        private Admin admin = new Admin();
         public void Bat(string data)
         {
             switch (data.Trim())
             {
                 case "admin": 
-                    Admin admin = new Admin(); 
+                    
                     admin.Run(); 
                     break;
                 case "client": 
-                    Client client = new Client(); 
+                    
                     client.Run(); 
                     break;
                 default: 

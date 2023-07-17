@@ -7,7 +7,7 @@ namespace Shopping_cart.Product_Operation
     {
         public void ExportToTextFile(List<ProductStruct> data)
         {
-            string FileName = "C:\\Users\\zlati\\Source\\Repos\\Shopping_cart\\save.txt";
+            string FileName = "save.txt";
             using (StreamWriter writer = new StreamWriter(FileName))
             {
 

@@ -25,7 +25,7 @@ namespace Shopping_cart
             List<ProductStruct> products = new List<ProductStruct>();
             List<CartStruct>  carts = new List<CartStruct>();
 
-            read.ReadFromFile(ref products, "C:\\Users\\zlati\\Source\\Repos\\Shopping_cart\\save.txt");
+            read.ReadFromFile(ref products);
             string command = null;
             string info = null;
 

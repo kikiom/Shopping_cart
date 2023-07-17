@@ -27,8 +27,9 @@ namespace Shopping_cart
             
            
         }
-        public void ReadFromFile(ref List<ProductStruct> products, string filename)
+        public void ReadFromFile(ref List<ProductStruct> products)
         {
+            string  filename =  "save.txt";
             if (File.Exists(filename))
             {
                 // Create a StreamReader to read from the file
