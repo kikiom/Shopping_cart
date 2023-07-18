@@ -27,8 +27,9 @@ namespace Shopping_cart
             
            
         }
-        public void ReadFromFile(ref List<ProductStruct> products)
+        public void ReadFromFile(Data data)
         {
+            List<ProductStruct> products = new List<ProductStruct>();
             string  filename =  "save.txt";
             if (File.Exists(filename))
             {
@@ -45,6 +46,7 @@ namespace Shopping_cart
                     }
                 }
             }
+            data.SetProducts(products);
         }
     }
 }

@@ -62,6 +62,7 @@
     <Compile Include="App_Operation\Exit.cs" />
     <Compile Include="App_Operation\Help.cs" />
     <Compile Include="App_Operation\Login.cs" />
+    <Compile Include="Interface\IUser.cs" />
     <Compile Include="Structs\CartStruct.cs" />
     <Compile Include="Cart_Operation\Add_Cart_Item.cs" />
     <Compile Include="Cart_Operation\Checkout.cs" />

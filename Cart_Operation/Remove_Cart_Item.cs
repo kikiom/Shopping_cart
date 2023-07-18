@@ -7,17 +7,20 @@ using System.Threading.Tasks;
 
 namespace Shopping_cart.Cart_Operation
 {
-    internal class Remove_Cart_Item : IOperation, ICartOperation
+    internal class Remove_Cart_Item : IOperation
     {
         private string _name = "remove_cart_item";
 
-        public void Bat(ref List<CartStruct> cart_items, List<ProductStruct> products, string data)
+        public void Bat(Data data, string args)
         {
+            List<CartStruct> cart_items = data.GetCarts();
+
             char[] separator = { ';' };
-            string[] sub = data.Split(separator, StringSplitOptions.RemoveEmptyEntries);
+            string[] sub = args.Split(separator, StringSplitOptions.RemoveEmptyEntries);
             //sub0 = id_item    
             int i = 0;
             int id_item = int.Parse(sub[0].Trim());
+
             List<CartStruct> new_cart_items = new List<CartStruct>();
             foreach (CartStruct item in cart_items) 
             {
@@ -28,7 +31,8 @@ namespace Shopping_cart.Cart_Operation
                 }
             }
             cart_items.Clear();
-            cart_items = new_cart_items;
+            data.SetCarts(new_cart_items);
+
         }
 
         public string GetName()

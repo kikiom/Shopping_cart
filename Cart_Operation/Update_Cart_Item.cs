@@ -7,13 +7,15 @@ using System.Threading.Tasks;
 
 namespace Shopping_cart.Cart_Operation
 {
-    internal class Update_Cart_Item : IOperation, ICartOperation
+    internal class Update_Cart_Item : IOperation
     {
         private string _name = "update_cart_item";
-        public void Bat(ref List<CartStruct> cart_items, List<ProductStruct> products, string data)
+        public void Bat(Data data, string args)
         {
+            List<CartStruct> cart_items = data.GetCarts(); 
+            List< ProductStruct > products = data.GetProducts();
             char[] separator = { ';' };
-            string[] sub = data.Split(separator, StringSplitOptions.RemoveEmptyEntries);
+            string[] sub = args.Split(separator, StringSplitOptions.RemoveEmptyEntries);
             //sub0 = id_item    sub1 = id_product    sub2 = quantity 
             int id_item = int.Parse(sub[0].Trim());
             int id_product = int.Parse(sub[1].Trim());
@@ -40,6 +42,7 @@ namespace Shopping_cart.Cart_Operation
                     }
                 }
             }
+            data.SetCarts(cart_items);
             
         }
 

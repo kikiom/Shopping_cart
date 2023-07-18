@@ -16,27 +16,24 @@ namespace Shopping_cart
             Data data = new Data();
             Help help = new Help();
 
-            List<IOperation> admin_operations = data.GetAdminOperation();
-            List<IOperation> client_operations = data.GetClientOperation();
-            List<IAppOperation> app_operations = data.GetAppOperation();
+            
+            data.GetAppOperation();
             List<IOperation> all_operations = new List<IOperation>();
-            all_operations.AddRange(admin_operations);
-            all_operations.AddRange(client_operations);
-            List<ProductStruct> products = new List<ProductStruct>();
-            List<CartStruct>  carts = new List<CartStruct>();
+            all_operations.AddRange(data.GetAdminOperation());
+            all_operations.AddRange(data.GetClientOperation());
 
-            read.ReadFromFile(ref products);
+
             string command = null;
-            string info = null;
+            string arguments = null;
 
             do
             {
-                read.ReadFromTerminal(ref command, ref info);
-                foreach (IAppOperation operation in app_operations)
+                read.ReadFromTerminal(ref command, ref arguments);
+                foreach (IOperation operation in data.GetAppOperation())
                 {
                     if (operation.GetName() == command)
                     {
-                        operation.Bat(info);
+                        operation.Bat(data, arguments);
                     }
                 }
                 if (help.GetName() == command)

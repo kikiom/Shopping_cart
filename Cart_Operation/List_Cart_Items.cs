@@ -7,14 +7,18 @@ using System.Threading.Tasks;
 
 namespace Shopping_cart.Cart_Operation
 {
-    internal class List_Cart_Items : IOperation, ICartOperation
+    internal class List_Cart_Items : IOperation
     {
         private string _name = "list_cart_items";
-        public void Bat(ref List<CartStruct> cart_items, List<ProductStruct> products, string data)
+        public void Bat(Data data, string args)
         {
+            List<CartStruct> cart_items = data.GetCarts();
+            List<ProductStruct> products = data.GetProducts();
+
             string text = null;
             foreach (CartStruct item in cart_items)
             {
+
                 text = (item.GetId()).ToString();
                 foreach (ProductStruct product in products)
                 {
@@ -25,6 +29,7 @@ namespace Shopping_cart.Cart_Operation
                         break;
                     }
                 }
+
                 text = text + item.GetQuantity();
                 Console.WriteLine(text);
             }

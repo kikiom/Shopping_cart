@@ -6,18 +6,19 @@ using System.Threading.Tasks;
 
 namespace Shopping_cart.Product_Operation
 {
-    internal class Search_Product : IOperation ,IPruductOperation
+    internal class Search_Product : IOperation
     {
         private string _name = "search_product";
         public string GetName() 
         { 
             return _name;
         }
-        public void Bat(ref List<ProductStruct> products, string data) 
+        public void Bat(Data data, string args) 
         {
+            List<ProductStruct> products = data.GetProducts();
             foreach (ProductStruct product in products) 
             {
-                if (product.GetName()==data.Trim())
+                if (product.GetName()==args.Trim())
                 {
                     Console.WriteLine("product " + data + " id is " + product.GetId());
                 }

@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace Shopping_cart.App_Operation
 {
-    internal class Exit : IAppOperation 
+    internal class Exit : IOperation 
     {
         private string _name = "exit";
 
-        public void Bat(string data)
+        public void Bat(Data data, string args)
         {
             System.Environment.Exit(0);
         }
@@ -19,6 +19,11 @@ namespace Shopping_cart.App_Operation
         public string GetName()
         {
             return _name;
+        }
+
+        public string print()
+        {
+            return "exit - exits the program";
         }
     }
 }

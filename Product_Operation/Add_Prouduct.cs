@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Shopping_cart.Product_Operation
 {
-    internal class Add_Prouduct : IOperation , IPruductOperation
+    internal class Add_Prouduct : IOperation
     {
         private string _name = "add_product";
         public string GetName()
@@ -20,10 +20,12 @@ namespace Shopping_cart.Product_Operation
             return "add_product - adds a new product";
         }
 
-        public void Bat(ref List<ProductStruct> products, string data)
+        public void Bat(Data data, string args)
         {
+            List<ProductStruct> products;
+            products = data.GetProducts();
             char[] separator = { ';' };
-            string[] sub = data.Split(separator, StringSplitOptions.RemoveEmptyEntries);
+            string[] sub = args.Split(separator, StringSplitOptions.RemoveEmptyEntries);
             //sub0 = name     sub1 = price    sub2 = quantity     sub3 = description
             int id;
             if (products.Count > 0)
@@ -36,6 +38,7 @@ namespace Shopping_cart.Product_Operation
             }
             ProductStruct product = new ProductStruct(id, int.Parse(sub[2].Trim()), double.Parse(sub[1].Trim()), sub[0].Trim(), sub[3].Trim());
             products.Add(product);
+            data.SetProducts(products);
             Save_Prouduct save = new Save_Prouduct();
             save.ExportToTextFile(products);
         }

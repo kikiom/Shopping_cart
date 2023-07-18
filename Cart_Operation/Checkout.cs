@@ -8,14 +8,18 @@ using System.Threading.Tasks;
 
 namespace Shopping_cart.Cart_Operation
 {
-    internal class Checkout : IOperation, ICartOperation
+    internal class Checkout : IOperation
     {
         private string _name = "checkout";
-        public void Bat(ref List<CartStruct> cart_items, List<ProductStruct> products, string data)
+        public void Bat(Data data, string args)
         {
+            List<CartStruct> cart_items = data.GetCarts();
+            List<ProductStruct> products = data.GetProducts();
+
             double price = 0;
             int id_product;
             ProductStruct product = new ProductStruct();
+
             foreach (CartStruct item in cart_items) 
             {
                 id_product = item.GetIdProduct();
@@ -30,6 +34,7 @@ namespace Shopping_cart.Cart_Operation
             }
             
             cart_items.Clear();
+            data.SetCarts(cart_items);
         }
 
         public string GetName()

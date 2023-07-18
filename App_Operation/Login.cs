@@ -3,25 +3,23 @@ using System;
 
 namespace Shopping_cart.App_Operation
 {
-    internal class Login : IAppOperation
+    internal class Login :  IOperation
     {
         private string _name = "login";
-        private Client client = new Client();
-        private Admin admin = new Admin();
-        public void Bat(string data)
+        public void Bat(Data data, string args)
         {
-            switch (data.Trim())
+            switch (args.Trim())
             {
-                case "admin": 
-                    
-                    admin.Run(); 
+                case "admin":
+                    Admin admin = data.GetAdmin();
+                    admin.Run(data);
                     break;
-                case "client": 
-                    
-                    client.Run(); 
+                case "client":
+                    Client client = data.GetClient();
+                    client.Run(data);
                     break;
-                default: 
-                    Console.WriteLine("Incorrect type of user"); 
+                default:
+                    Console.WriteLine("Incorrect type of user");
                     break;
             }
         }
@@ -29,6 +27,11 @@ namespace Shopping_cart.App_Operation
         public string GetName()
         {
             return _name;
+        }
+
+        public string print()
+        {
+            return "";
         }
     }
 }

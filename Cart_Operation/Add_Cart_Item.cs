@@ -8,18 +8,24 @@ using System.Threading.Tasks;
 
 namespace Shopping_cart.Cart_Operation
 {
-    internal class Add_Cart_Item : IOperation, ICartOperation
+    internal class Add_Cart_Item : IOperation
     {
         private string _name="add_cart_item";
-        public void Bat(ref List<CartStruct> cart_items, List<ProductStruct> products, string data)
+        public void Bat(Data data, string args)
         {
+            List<CartStruct> cart_items = data.GetCarts();
+            List<ProductStruct> products = data.GetProducts();
+
             char[] separator = { ';' };
-            string[] sub = data.Split(separator, StringSplitOptions.RemoveEmptyEntries);
+            string[] sub = args.Split(separator, StringSplitOptions.RemoveEmptyEntries);
             //sub0 = id_product    sub1 = quantity 
+
             int id_item =cart_items.Count;
             int id_product = int.Parse(sub[0].Trim());
             int quantity = int.Parse(sub[1].Trim());
+
             ProductStruct product = new ProductStruct();
+
             foreach(ProductStruct item in products) 
             { 
                 if(item.GetId() == id_product)
@@ -36,6 +42,7 @@ namespace Shopping_cart.Cart_Operation
                 Console.WriteLine("not enough quantity");
             }
 
+            data.SetCarts(cart_items);
         }
 
         public string GetName()

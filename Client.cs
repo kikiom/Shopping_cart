@@ -9,42 +9,38 @@ using System.Threading.Tasks;
 
 namespace Shopping_cart
 {
-    internal class Client
+    internal class Client : IUser
     {
-        public void Run()
+        public void Run(Data data)
         {
             Read read = new Read();
             Save_Prouduct save = new Save_Prouduct();
-            Data data = new Data();
             Help help = new Help();
-           
-            List<IOperation> client_operations = data.GetClientOperation();
-            List<IAppOperation> app_operations = data.GetAppOperation();
-            List<IOperation> all_operations = new List<IOperation>();
-            all_operations.AddRange(client_operations);
-            List<ProductStruct> products = new List<ProductStruct>();
-            List<CartStruct> carts = new List<CartStruct>();
+            
 
-            read.ReadFromFile(ref products);
+            List<IOperation> all_operations = new List<IOperation>();
+            all_operations.AddRange(data.GetClientOperation());
+
+
+            read.ReadFromFile(data);
             string command = null;
-            string info = null;
+            string args = null;
 
             do
             {
-                read.ReadFromTerminal(ref command, ref info);
-                foreach (IOperation operation in client_operations)
+                read.ReadFromTerminal(ref command, ref args);
+                foreach (IOperation operation in data.GetClientOperation())
                 {
                     if (operation.GetName() == command)
                     {
-                        ICartOperation cartOperation = (ICartOperation)operation;
-                        cartOperation.Bat(ref carts, products, info);
+                        operation.Bat(data, args);
                     }
                 }
-                foreach (IAppOperation operation in app_operations)
+                foreach (IOperation operation in data.GetAppOperation())
                 {
                     if (operation.GetName() == command)
                     {
-                        operation.Bat(info);
+                        operation.Bat(data, args);
                     }
                 }
                 if (help.GetName() == command)
