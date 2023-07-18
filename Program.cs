@@ -12,17 +12,11 @@ namespace Shopping_cart
         static void Main(string[] args)
         {
             Read read = new Read();
-            Save_Prouduct save = new Save_Prouduct();
             Data data = new Data();
             Help help = new Help();
 
-            
-            data.GetAppOperation();
-            List<IOperation> all_operations = new List<IOperation>();
-            all_operations.AddRange(data.GetAdminOperation());
-            all_operations.AddRange(data.GetClientOperation());
 
-
+            read.ReadFromFile(data);
             string command = null;
             string arguments = null;
 
@@ -38,7 +32,7 @@ namespace Shopping_cart
                 }
                 if (help.GetName() == command)
                 {
-                    help.Bat(all_operations);
+                    help.Bat(data.GetAppOperation());
                 }
 
             } while (true);

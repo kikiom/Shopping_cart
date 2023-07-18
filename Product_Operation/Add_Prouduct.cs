@@ -24,23 +24,35 @@ namespace Shopping_cart.Product_Operation
         {
             List<ProductStruct> products;
             products = data.GetProducts();
+
             char[] separator = { ';' };
             string[] sub = args.Split(separator, StringSplitOptions.RemoveEmptyEntries);
             //sub0 = name     sub1 = price    sub2 = quantity     sub3 = description
-            int id;
-            if (products.Count > 0)
+            foreach(ProductStruct product in products)
             {
-                id = products.Last().GetId() + 1;
+                if (double.Parse(sub[1].Trim()) == product.GetPrice() && sub[0].Trim() == product.GetName() && sub[3].Trim() == product.GetDescription())
+                {
+                    Console.WriteLine("Already exist. Use edit_product ");
+                }
+                else
+                {
+                    int id;
+                    if (products.Count > 0)
+                    {
+                        id = products.Last().GetId() + 1;
+                    }
+                    else
+                    {
+                        id = 0;
+                    }
+
+                    ProductStruct new_product = new ProductStruct(id, int.Parse(sub[2].Trim()), double.Parse(sub[1].Trim()), sub[0].Trim(), sub[3].Trim());
+                    products.Add(new_product);
+                    data.SetProducts(products);
+                    Save_Prouduct save = new Save_Prouduct();
+                    save.ExportToTextFile(products);
+                }
             }
-            else
-            {
-                id = 0;
-            }
-            ProductStruct product = new ProductStruct(id, int.Parse(sub[2].Trim()), double.Parse(sub[1].Trim()), sub[0].Trim(), sub[3].Trim());
-            products.Add(product);
-            data.SetProducts(products);
-            Save_Prouduct save = new Save_Prouduct();
-            save.ExportToTextFile(products);
         }
     }
 }

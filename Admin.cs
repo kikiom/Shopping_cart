@@ -10,29 +10,21 @@ namespace Shopping_cart
         public void Run(Data data)
         {
             Read read = new Read();
-            Save_Prouduct save = new Save_Prouduct();
             Help help = new Help();
 
 
             List<IOperation> all_operations = new List<IOperation>();
             all_operations.AddRange(data.GetAdminOperation());
+            all_operations.AddRange(data.GetAppOperation());
 
 
-            read.ReadFromFile(data);
             string command = null;
             string args = null;
 
             do
             {
                 read.ReadFromTerminal(ref command, ref args);
-                foreach (IOperation operation in data.GetAdminOperation())
-                {
-                    if (operation.GetName() == command)
-                    {
-                        operation.Bat(data, args);
-                    }
-                }
-                foreach (IOperation operation in data.GetAppOperation())
+                foreach (IOperation operation in all_operations)
                 {
                     if (operation.GetName() == command)
                     {
