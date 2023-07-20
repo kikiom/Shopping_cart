@@ -42,7 +42,7 @@ namespace Shopping_cart
                         char[] separator = { ';' };
                         string[] sub = line.Split(separator, StringSplitOptions.RemoveEmptyEntries);
                         //sub0 = id     sub1 = name     sub2 = price    sub3 = quantity     sub4 = description
-                        products.Add(new ProductStruct(int.Parse(sub[0]), int.Parse(sub[3]), double.Parse(sub[2]), sub[1], sub[4]));
+                        products.Add(new ProductStruct(int.Parse(sub[0].Trim()), int.Parse(sub[3].Trim()), double.Parse(sub[2].Trim()), sub[1].Trim(), sub[4].Trim()));
                     }
                 }
             }

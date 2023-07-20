@@ -26,6 +26,7 @@ namespace Shopping_cart
             string command = null;
             string args = null;
 
+            Console.WriteLine("Welcome wallet");
             do
             {
                 read.ReadFromTerminal(ref command, ref args);

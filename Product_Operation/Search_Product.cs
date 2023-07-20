@@ -15,14 +15,28 @@ namespace Shopping_cart.Product_Operation
         }
         public void Bat(Data data, string args) 
         {
+            bool found_flag = false;
             List<ProductStruct> products = data.GetProducts();
-            foreach (ProductStruct product in products) 
+            if(products != null)
             {
-                if (product.GetName()==args.Trim())
+                foreach (ProductStruct product in products)
                 {
-                    Console.WriteLine("product " + data + " id is " + product.GetId());
+                    if (product.GetName() == args.Trim())
+                    {
+                        Console.WriteLine("product " + data + " id is " + product.GetId());
+                        found_flag = true;
+                    }
+                }
+                if (found_flag == false)
+                {
+                    Console.WriteLine("Product is not found");
                 }
             }
+            else 
+            {
+                Console.WriteLine("No products"); 
+            }
+            
         }
         public string print()
         {

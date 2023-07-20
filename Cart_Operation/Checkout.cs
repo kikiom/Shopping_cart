@@ -19,22 +19,29 @@ namespace Shopping_cart.Cart_Operation
             double price = 0;
             int id_product;
             ProductStruct product = new ProductStruct();
-
-            foreach (CartStruct item in cart_items) 
+            if (cart_items.Count() > 0)
             {
-                id_product = item.GetIdProduct();
-                foreach (ProductStruct item_prouduct in products) 
+
+                foreach (CartStruct item in cart_items)
                 {
-                    if(item_prouduct.GetId()  == id_product)
+                    id_product = item.GetIdProduct();
+                    foreach (ProductStruct item_prouduct in products)
                     {
-                        product = item_prouduct;
+                        if (item_prouduct.GetId() == id_product)
+                        {
+                            product = item_prouduct;
+                        }
                     }
+                    price = price + (product.GetPrice() * item.GetQuantity());
                 }
-                price = price + (product.GetPrice()*item.GetQuantity());
+
+                cart_items.Clear();
+                data.SetCarts(cart_items);
             }
-            
-            cart_items.Clear();
-            data.SetCarts(cart_items);
+            else
+            {
+                Console.WriteLine("No products in the cart");
+            }
         }
 
         public string GetName()

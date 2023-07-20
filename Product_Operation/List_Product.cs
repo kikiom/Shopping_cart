@@ -13,9 +13,16 @@ namespace Shopping_cart.Product_Operation
         public void Bat(Data data, string args)
         {
             List<ProductStruct> products = data.GetProducts();
-            foreach (ProductStruct product in products)
+            if(products != null ) 
             {
-                Console.WriteLine(product.ToString());
+                foreach (ProductStruct product in products)
+                {
+                    Console.WriteLine(product.ToString());
+                }
+            }
+            else
+            {
+                Console.WriteLine("No products");
             }
         }
 

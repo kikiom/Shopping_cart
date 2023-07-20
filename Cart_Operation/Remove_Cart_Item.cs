@@ -1,6 +1,7 @@
 ﻿using Shopping_cart.Interface;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,7 +15,7 @@ namespace Shopping_cart.Cart_Operation
         public void Bat(Data data, string args)
         {
             List<CartStruct> cart_items = data.GetCarts();
-
+            bool found_flag = false;
             char[] separator = { ';' };
             string[] sub = args.Split(separator, StringSplitOptions.RemoveEmptyEntries);
             //sub0 = id_item    
@@ -22,16 +23,29 @@ namespace Shopping_cart.Cart_Operation
             int id_item = int.Parse(sub[0].Trim());
 
             List<CartStruct> new_cart_items = new List<CartStruct>();
-            foreach (CartStruct item in cart_items) 
+            if (cart_items.Count() > 0)
             {
-                if(item.GetId() != id_item) 
+                foreach (CartStruct item in cart_items)
                 {
-                    new_cart_items.Add(new CartStruct(i, item.GetQuantity(), item.GetIdProduct()));
-                    i++;
+                    if (item.GetId() != id_item)
+                    {
+                        new_cart_items.Add(new CartStruct(i, item.GetQuantity(), item.GetIdProduct()));
+                        i++;
+                        found_flag = true;
+                    }
                 }
+                cart_items.Clear();
+                data.SetCarts(new_cart_items);
+
             }
-            cart_items.Clear();
-            data.SetCarts(new_cart_items);
+            else
+            {
+                Console.WriteLine("No products in the cart");
+            }
+            if (found_flag == false)
+            {
+                Console.WriteLine("There is no item with this id");
+            }
 
         }
 

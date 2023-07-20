@@ -1,6 +1,7 @@
 ﻿using Shopping_cart.App_Operation;
 using Shopping_cart.Interface;
 using Shopping_cart.Product_Operation;
+using System;
 using System.Collections.Generic;
 
 namespace Shopping_cart
@@ -20,6 +21,7 @@ namespace Shopping_cart
             string command = null;
             string arguments = null;
 
+            Console.WriteLine("Hello there");
             do
             {
                 read.ReadFromTerminal(ref command, ref arguments);

@@ -36,21 +36,26 @@ namespace Shopping_cart.Product_Operation
                 }
                 else
                 {
-                    int id;
-                    if (products.Count > 0)
+                    if(double.Parse(sub[1].Trim())>=0 && int.Parse(sub[2].Trim())>=0)
                     {
-                        id = products.Last().GetId() + 1;
-                    }
-                    else
-                    {
-                        id = 0;
-                    }
+                        int id;
+                        if (products.Count > 0)
+                        {
+                            id = products.Last().GetId() + 1;
+                        }
+                        else
+                        {
+                            id = 0;
+                        }
 
-                    ProductStruct new_product = new ProductStruct(id, int.Parse(sub[2].Trim()), double.Parse(sub[1].Trim()), sub[0].Trim(), sub[3].Trim());
-                    products.Add(new_product);
-                    data.SetProducts(products);
-                    Save_Prouduct save = new Save_Prouduct();
-                    save.ExportToTextFile(products);
+                        ProductStruct new_product = new ProductStruct(id, int.Parse(sub[2].Trim()), double.Parse(sub[1].Trim()), sub[0].Trim(), sub[3].Trim());
+                        products.Add(new_product);
+                        data.SetProducts(products);
+                        Save_Prouduct save = new Save_Prouduct();
+                        save.ExportToTextFile(products);
+                        Console.WriteLine("Product added");
+                    }
+                    
                 }
             }
         }

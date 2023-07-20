@@ -14,35 +14,53 @@ namespace Shopping_cart.Cart_Operation
         {
             List<CartStruct> cart_items = data.GetCarts(); 
             List< ProductStruct > products = data.GetProducts();
+
+            bool found_flag = false;
             char[] separator = { ';' };
             string[] sub = args.Split(separator, StringSplitOptions.RemoveEmptyEntries);
-            //sub0 = id_item    sub1 = id_product    sub2 = quantity 
+            //sub0 = id_item    sub1 = quantity 
             int id_item = int.Parse(sub[0].Trim());
-            int id_product = int.Parse(sub[1].Trim());
-            int quantity = int.Parse(sub[2].Trim());
+            int id_product;
+            int quantity = int.Parse(sub[1].Trim());
+
             ProductStruct product = new ProductStruct();
-            foreach (ProductStruct item in products)
+
+            if (cart_items.Count() > 0)
             {
-                if (item.GetId() == id_product)
+                foreach (CartStruct item in cart_items)
                 {
-                    product = item;
+                    if (item.GetId() == id_item)
+                    {
+                        id_product = item.GetIdProduct();
+                        foreach(ProductStruct product_item in products)
+                        {
+                            if (product_item.GetId() == id_product)
+                            {
+                                product = product_item;
+                            }
+                        }
+                        if (product.GetQuantity() >= quantity)
+                        {
+                            item.SetQuantity(quantity);
+                        }
+                        else
+                        {
+                            Console.WriteLine("not enough quantity");
+                        }
+                        found_flag = true;
+                    }
+                }
+                data.SetCarts(cart_items);
+                if (found_flag == false)
+                {
+                    Console.WriteLine("No product with this id");
                 }
             }
-            foreach (CartStruct item in cart_items) 
+            else
             {
-                if(item.GetId() == id_item) 
-                {
-                    if (product.GetQuantity() >= quantity)
-                    {
-                        item.SetQuantity(quantity);
-                    }
-                    else
-                    {
-                        Console.WriteLine("not enough quantity");
-                    }
-                }
+                Console.WriteLine("No cart items");
             }
-            data.SetCarts(cart_items);
+            
             
         }
 

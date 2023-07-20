@@ -16,23 +16,31 @@ namespace Shopping_cart.Cart_Operation
             List<ProductStruct> products = data.GetProducts();
 
             string text = null;
-            foreach (CartStruct item in cart_items)
+            if (cart_items.Count() > 0)
             {
-
-                text = (item.GetId()).ToString();
-                foreach (ProductStruct product in products)
+                foreach (CartStruct item in cart_items)
                 {
-                    if (item.GetIdProduct() == product.GetId()) 
-                    {
-                        text = text + product.GetName();
-                        text = text + product.GetPrice();
-                        break;
-                    }
-                }
 
-                text = text + item.GetQuantity();
-                Console.WriteLine(text);
+                    text = (item.GetId()).ToString();
+                    foreach (ProductStruct product in products)
+                    {
+                        if (item.GetIdProduct() == product.GetId())
+                        {
+                            text = text + product.GetName();
+                            text = text + product.GetPrice();
+                            break;
+                        }
+                    }
+
+                    text = text + item.GetQuantity();
+                    Console.WriteLine(text);
+                }
             }
+            else
+            {
+                Console.WriteLine("No products in the cart");
+            }
+            
         }
 
         public string GetName()
