@@ -16,36 +16,53 @@ namespace Shopping_cart.Cart_Operation
         {
             List<CartStruct> cart_items = data.GetCarts();
             bool found_flag = false;
+            bool parse_id_flag = false;
             char[] separator = { ';' };
             string[] sub = args.Split(separator, StringSplitOptions.RemoveEmptyEntries);
             //sub0 = id_item    
-            int i = 0;
-            int id_item = int.Parse(sub[0].Trim());
-
-            List<CartStruct> new_cart_items = new List<CartStruct>();
-            if (cart_items.Count() > 0)
+            if (sub.Length == 1) 
             {
-                foreach (CartStruct item in cart_items)
+                int i = 0;
+                int id_item = 0;
+                if (int.TryParse(sub[0].Trim(), out int parsed_id))
                 {
-                    if (item.GetId() != id_item)
+                    id_item = parsed_id;
+                    parse_id_flag = true;
+                }
+                else
+                {
+                    Console.WriteLine("Parsing failed. The input is not a valid integer.");
+                }
+                if (parse_id_flag == true)
+                {
+
+                    List<CartStruct> new_cart_items = new List<CartStruct>();
+                    if (cart_items.Count() > 0)
                     {
-                        new_cart_items.Add(new CartStruct(i, item.GetQuantity(), item.GetIdProduct()));
-                        i++;
-                        found_flag = true;
+                        foreach (CartStruct item in cart_items)
+                        {
+                            if (item.GetId() != id_item)
+                            {
+                                new_cart_items.Add(new CartStruct(i, item.GetQuantity(), item.GetIdProduct()));
+                                i++;
+                                found_flag = true;
+                            }
+                        }
+                        cart_items.Clear();
+                        data.SetCarts(new_cart_items);
+
+                    }
+                    else
+                    {
+                        Console.WriteLine("No products in the cart");
+                    }
+                    if (found_flag == false)
+                    {
+                        Console.WriteLine("There is no item with this id");
                     }
                 }
-                cart_items.Clear();
-                data.SetCarts(new_cart_items);
-
             }
-            else
-            {
-                Console.WriteLine("No products in the cart");
-            }
-            if (found_flag == false)
-            {
-                Console.WriteLine("There is no item with this id");
-            }
+            
 
         }
 

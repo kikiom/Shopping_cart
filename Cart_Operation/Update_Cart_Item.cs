@@ -19,47 +19,75 @@ namespace Shopping_cart.Cart_Operation
             char[] separator = { ';' };
             string[] sub = args.Split(separator, StringSplitOptions.RemoveEmptyEntries);
             //sub0 = id_item    sub1 = quantity 
-            int id_item = int.Parse(sub[0].Trim());
-            int id_product;
-            int quantity = int.Parse(sub[1].Trim());
-
-            ProductStruct product = new ProductStruct();
-
-            if (cart_items.Count() > 0)
+            if (sub.Length == 2)
             {
-                foreach (CartStruct item in cart_items)
+                bool parse_id_flag = false;
+                bool parse_quantity_flag = false;
+                int id_item = 0, quantity = 0;
+                int id_product;
+                if (int.TryParse(sub[0].Trim(), out int parsed_id))
                 {
-                    if (item.GetId() == id_item)
+                    id_item = parsed_id;
+                    parse_id_flag = true;
+                }
+                else
+                {
+                    Console.WriteLine("Parsing failed. The input is not a valid integer.");
+                }
+                if (int.TryParse(sub[1].Trim(), out int parsed_quantity))
+                {
+                    quantity = parsed_quantity;
+                    parse_quantity_flag = true;
+                }
+                else
+                {
+                    Console.WriteLine("Parsing failed. The input is not a valid integer.");
+                }
+                if (parse_id_flag == true && parse_quantity_flag == true)
+                {
+
+
+                    ProductStruct product = new ProductStruct();
+
+                    if (cart_items.Count() > 0)
                     {
-                        id_product = item.GetIdProduct();
-                        foreach(ProductStruct product_item in products)
+                        foreach (CartStruct item in cart_items)
                         {
-                            if (product_item.GetId() == id_product)
+                            if (item.GetId() == id_item)
                             {
-                                product = product_item;
+                                id_product = item.GetIdProduct();
+                                foreach (ProductStruct product_item in products)
+                                {
+                                    if (product_item.GetId() == id_product)
+                                    {
+                                        product = product_item;
+                                    }
+                                }
+                                if (product.GetQuantity() >= quantity)
+                                {
+                                    item.SetQuantity(quantity);
+                                }
+                                else
+                                {
+                                    Console.WriteLine("not enough quantity");
+                                }
+                                found_flag = true;
                             }
                         }
-                        if (product.GetQuantity() >= quantity)
+                        data.SetCarts(cart_items);
+                        if (found_flag == false)
                         {
-                            item.SetQuantity(quantity);
+                            Console.WriteLine("No product with this id");
                         }
-                        else
-                        {
-                            Console.WriteLine("not enough quantity");
-                        }
-                        found_flag = true;
+                    }
+                    else
+                    {
+                        Console.WriteLine("No cart items");
                     }
                 }
-                data.SetCarts(cart_items);
-                if (found_flag == false)
-                {
-                    Console.WriteLine("No product with this id");
-                }
+                
             }
-            else
-            {
-                Console.WriteLine("No cart items");
-            }
+            
             
             
         }
