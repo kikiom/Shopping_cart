@@ -9,7 +9,7 @@ namespace Shopping_cart
 
     internal class Program
     {
-
+        static bool exitRequested = false;
         static void Main(string[] args)
         {
             Read read = new Read();
@@ -25,23 +25,37 @@ namespace Shopping_cart
             do
             {
                 read.ReadFromTerminal(ref command, ref arguments);
-                foreach (IOperation operation in data.GetAppOperation())
+                foreach (IOperation operation in data.GetAllOperation())
                 {
-                    if (operation.GetName() == command)
+                    if (operation.GetName() == command && operation.CheckType(data.GetUserType())==true )
                     {
                         operation.Bat(data, arguments);
+                        break;
                     }
                 }
                 if (help.GetName() == command)
                 {
-                    help.Bat(data.GetAppOperation());
+                    help.Bat(data.GetTypeOperations());
                 }
+                Console.CancelKeyPress += Console_CancelKeyPress;
 
-            } while (true);
+            } while (command != "exit" || !exitRequested);
+
+            Save_Prouduct save = new Save_Prouduct();
+            save.ExportToTextFile(data.GetProducts());
+            // Clean up and exit the program
+            Console.WriteLine("Exiting the program...");
+          
 
             
-
-
         }
+        private static void Console_CancelKeyPress(object sender, ConsoleCancelEventArgs e)
+        {
+            e.Cancel = true;
+            
+            exitRequested = true;
+        }
+
     }
+
 }

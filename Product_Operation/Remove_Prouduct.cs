@@ -43,6 +43,20 @@ namespace Shopping_cart.Product_Operation
             data.SetProducts(products);
         }
 
+        public bool CheckType(string type)
+        {
+            switch (type)
+            {
+                case "admin":
+                    return true;
+
+                case "client":
+                    return true;
+
+                default: return false;
+            }
+        }
+
         public string GetName()
         {
             return _name;
@@ -50,7 +64,7 @@ namespace Shopping_cart.Product_Operation
 
         public string print()
         {
-            return "remove_product - removes a product";
+            return "remove_product( id ) - removes a product";
         }
     }
 }

@@ -13,7 +13,7 @@ namespace Shopping_cart.Product_Operation
 
                 foreach (ProductStruct item in data)
                 {
-                    writer.WriteLine(item.ToString());
+                    writer.WriteLine(item.ToSave());
                 }
 
 

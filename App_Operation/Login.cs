@@ -3,7 +3,7 @@ using System;
 
 namespace Shopping_cart.App_Operation
 {
-    internal class Login :  IOperation
+    internal class Login : IOperation
     {
         private string _name = "login";
         public void Bat(Data data, string args)
@@ -11,17 +11,22 @@ namespace Shopping_cart.App_Operation
             switch (args.Trim())
             {
                 case "admin":
-                    Admin admin = data.GetAdmin();
-                    admin.Run(data);
+                    Console.WriteLine("Welcome master");
+                    data.SetUserType("admin");
                     break;
                 case "client":
-                    Client client = data.GetClient();
-                    client.Run(data);
+                    Console.WriteLine("Welcome wallet");
+                    data.SetUserType("client");
                     break;
                 default:
                     Console.WriteLine("Incorrect type of user");
                     break;
             }
+        }
+
+        public bool CheckType(string type)
+        {
+            return true;
         }
 
         public string GetName()
@@ -31,7 +36,7 @@ namespace Shopping_cart.App_Operation
 
         public string print()
         {
-            return "login - logs you in a accaunt";
+            return "login ( type of user )- logs you in a accaunt";
         }
     }
 }

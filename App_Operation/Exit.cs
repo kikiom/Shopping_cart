@@ -9,7 +9,11 @@ namespace Shopping_cart.App_Operation
         public void Bat(Data data, string args)
         {
             Console.WriteLine("bye");
-            System.Environment.Exit(0);
+        }
+
+        public bool CheckType(string type)
+        {
+            return true;
         }
 
         public string GetName()
@@ -19,7 +23,7 @@ namespace Shopping_cart.App_Operation
 
         public string print()
         {
-            return "exit - exits the program";
+            return "exit () - exits the program";
         }
     }
 }

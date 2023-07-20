@@ -14,14 +14,12 @@ namespace Shopping_cart
             Help help = new Help();
 
 
-            List<IOperation> all_operations = new List<IOperation>();
-            all_operations.AddRange(data.GetAdminOperation());
-            all_operations.AddRange(data.GetAppOperation());
+           
 
 
             string command = null;
             string args = null;
-
+/*
             Console.WriteLine("Welcome master");
             do
             {
@@ -31,6 +29,7 @@ namespace Shopping_cart
                     if (operation.GetName() == command)
                     {
                         operation.Bat(data, args);
+                        break;
                     }
                 }
                 if (help.GetName() == command)
@@ -39,7 +38,7 @@ namespace Shopping_cart
                 }
 
             } while (true);
-
+*/
 
         }
     }

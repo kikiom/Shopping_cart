@@ -40,8 +40,21 @@ namespace Shopping_cart.Product_Operation
         }
         public string print()
         {
-            return "search_product - searching for a product";
+            return "search_product( name ) - searching for a product";
         }
 
+        public bool CheckType(string type)
+        {
+            switch (type)
+            {
+                case "admin":
+                    return true;
+
+                case "client":
+                    return true;
+
+                default: return false;
+            }
+        }
     }
 }

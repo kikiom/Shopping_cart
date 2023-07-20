@@ -28,7 +28,22 @@ namespace Shopping_cart.Product_Operation
 
         public string print()
         {
-            return "list_products - shows all products";
+            return "list_products() - shows all products";
+        }
+
+        public bool CheckType(string type)
+        {
+            switch (type)
+            {
+                case "admin":
+                    return true;
+
+                case "client":
+                    return true;
+
+                default: return false;
+            }
+
         }
     }
 }

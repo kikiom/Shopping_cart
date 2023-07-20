@@ -17,7 +17,7 @@ namespace Shopping_cart.Product_Operation
         
         public string print()
         {
-            return "add_product - adds a new product";
+            return "add_product( name ; price ; quantity ; description) - adds a new product";
         }
 
         public void Bat(Data data, string args)
@@ -57,6 +57,17 @@ namespace Shopping_cart.Product_Operation
                     }
                     
                 }
+            }
+        }
+
+        public bool CheckType(string type)
+        {
+            switch (type)
+            {
+                case "admin":
+                    return true;
+
+                default: return false;
             }
         }
     }

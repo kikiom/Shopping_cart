@@ -21,18 +21,18 @@ namespace Shopping_cart.Cart_Operation
                 foreach (CartStruct item in cart_items)
                 {
 
-                    text = (item.GetId()).ToString();
+                    text = "ID : " + (item.GetId()).ToString();
                     foreach (ProductStruct product in products)
                     {
                         if (item.GetIdProduct() == product.GetId())
                         {
-                            text = text + product.GetName();
-                            text = text + product.GetPrice();
+                            text = text + "; Name : " + product.GetName();
+                            text = text + "; Price : " + product.GetPrice();
                             break;
                         }
                     }
 
-                    text = text + item.GetQuantity();
+                    text = text + "; Quantity : " + item.GetQuantity();
                     Console.WriteLine(text);
                 }
             }
@@ -43,6 +43,17 @@ namespace Shopping_cart.Cart_Operation
             
         }
 
+        public bool CheckType(string type)
+        {
+            switch (type)
+            {
+                case "client":
+                    return true;
+
+                default: return false;
+            }
+        }
+
         public string GetName()
         {
             return _name;
@@ -50,7 +61,7 @@ namespace Shopping_cart.Cart_Operation
 
         public string print()
         {
-            return "list_cart_items - list all items in the cart";
+            return "list_cart_items() - list all items in the cart";
         }
     }
 }

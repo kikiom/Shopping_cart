@@ -12,25 +12,32 @@ namespace Shopping_cart.Product_Operation
         }
         public void Bat(Data data, string args)
         {
-            bool found_flag=false;
+            bool found_flag = false;
             List<ProductStruct> products = data.GetProducts();
+
             char[] separator = { ';' };
             string[] sub = args.Split(separator, StringSplitOptions.RemoveEmptyEntries);
             //sub0 = id     sub1 = field_name     sub2 = info
+
             int id = int.Parse(sub[0].Trim());
             string field_name = sub[1].Trim();
-            if(products.Count > 0)
+
+            if (products.Count > 0)
             {
+
                 foreach (ProductStruct product in products)
                 {
+
                     if (product.GetId() == id)
                     {
                         switch (field_name)
                         {
                             case "name":
+
                                 product.SetName(sub[2].Trim());
                                 break;
                             case "price":
+
                                 if (double.Parse(sub[2].Trim()) >= 0)
                                 {
                                     product.SetPrice(double.Parse(sub[2].Trim()));
@@ -42,6 +49,7 @@ namespace Shopping_cart.Product_Operation
 
                                 break;
                             case "quantity":
+
                                 if (int.Parse(sub[2].Trim()) > 0)
                                 {
                                     product.SetQuantity(int.Parse(sub[2].Trim()));
@@ -65,7 +73,7 @@ namespace Shopping_cart.Product_Operation
                                 break;
 
                         }
-                        found_flag=true;
+                        found_flag = true;
                     }
                 }
                 if (found_flag == false)
@@ -81,13 +89,23 @@ namespace Shopping_cart.Product_Operation
             Save_Prouduct save = new Save_Prouduct();
             save.ExportToTextFile(products);
             data.SetProducts(products);
-        
+
         }
 
         public string print()
         {
-            return "edit_product - eidt the specified product";
+            return "edit_product( id ; feild ; new data) - eidt the specified product";
         }
 
+        public bool CheckType(string type)
+        {
+            switch (type)
+            {
+                case "admin":
+                    return true;
+
+                default: return false;
+            }
+        }
     }
 }

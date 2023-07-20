@@ -13,17 +13,24 @@ namespace Shopping_cart
         {
             string input = Console.ReadLine();
             char[] separators = new char[] { '(', ')' };
-
-            string[] subs = input.Split(separators, StringSplitOptions.RemoveEmptyEntries);
-            command = subs[0].Trim();
-            if (subs.Length > 1 ) 
+            if (input != null)
             {
-                data = subs[1];
-            }
-            else
-            {
-                data = null;
-            }
+                string[] subs = input.Split(separators, StringSplitOptions.RemoveEmptyEntries);
+                if (subs.Length == 2)
+                {
+                    command = subs[0].Trim();
+                    if (subs.Length > 1)
+                    {
+                        data = subs[1];
+                    }
+                    else
+                    {
+                        data = null;
+                    }
+                }
+                
+            }            
+            
             
            
         }

@@ -17,16 +17,13 @@ namespace Shopping_cart
             Help help = new Help();
             
 
-            List<IOperation> all_operations = new List<IOperation>();
-            all_operations.AddRange(data.GetClientOperation());
-            all_operations.AddRange(data.GetAppOperation());
 
             
             
             string command = null;
             string args = null;
 
-            Console.WriteLine("Welcome wallet");
+          /*  
             do
             {
                 read.ReadFromTerminal(ref command, ref args);
@@ -35,6 +32,7 @@ namespace Shopping_cart
                     if (operation.GetName() == command)
                     {
                         operation.Bat (data, args);
+                        break;
                     }
                 }
                 if (help.GetName() == command)
@@ -43,7 +41,7 @@ namespace Shopping_cart
                 }
 
             } while (true);
-
+*/
 
         }
     }

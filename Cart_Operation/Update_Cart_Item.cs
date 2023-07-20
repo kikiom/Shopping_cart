@@ -64,6 +64,17 @@ namespace Shopping_cart.Cart_Operation
             
         }
 
+        public bool CheckType(string type)
+        {
+            switch (type)
+            {
+                case "client":
+                    return true;
+
+                default: return false;
+            }
+        }
+
         public string GetName()
         {
             return _name;
@@ -71,7 +82,7 @@ namespace Shopping_cart.Cart_Operation
 
         public string print()
         {
-            return "update_cart_item - updates the quantity of the item";
+            return "update_cart_item ( id_item ; quantity ) - updates the quantity of the item";
         }
     }
 }
