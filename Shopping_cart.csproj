@@ -80,7 +80,7 @@
     <Compile Include="Interface\IPruductOperation.cs" />
     <Compile Include="Product_Operation\List_Product.cs" />
     <Compile Include="Product_Operation\Remove_Prouduct.cs" />
-    <Compile Include="Product_Operation\Save_Prouduct.cs" />
+    <Compile Include="Product_Operation\Save.cs" />
     <Compile Include="Product_Operation\Search_Product.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

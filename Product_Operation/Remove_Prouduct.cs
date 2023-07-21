@@ -11,36 +11,45 @@ namespace Shopping_cart.Product_Operation
             bool found_flag=false;
             List<ProductStruct> products = data.GetProducts();
             int i = 0, index =0;
-            
-            if (products.Count > 0)
+            if (int.TryParse(args.Trim(),out int id))
             {
-                foreach (ProductStruct product in products)
+                if (products.Count > 0)
                 {
-
-                    if (product.GetId() == int.Parse(args.Trim()))
+                    foreach (ProductStruct product in products)
                     {
-                        index = i;
-                        found_flag = true;
-                    }
-                    i++;
-                }
-                if (!(index == 0 && i == products.Count))
-                {
-                    products.RemoveAt(index);
-                }
-                if (found_flag == false)
-                {
-                    Console.WriteLine("Product is not found");
-                }
 
+                        if (product.GetId() == id)
+                        {
+                            index = i;
+                            found_flag = true;
+                        }
+                        i++;
+                    }
+
+                    if (!(index == 0 && i == products.Count))
+                    {
+                        products.RemoveAt(index);
+                    }
+
+                    if (found_flag == false)
+                    {
+                        Console.WriteLine("Product is not found");
+                    }
+
+                }
+                else
+                {
+                    Console.WriteLine("No products");
+                }
+                Save save = new Save();
+                save.ExportToTextFile(products);
+                data.SetProducts(products);
             }
             else
             {
-                Console.WriteLine("No products");
+                Console.WriteLine("Parsing failed. The input is not a valid integer.");
             }
-            Save_Prouduct save = new Save_Prouduct();
-            save.ExportToTextFile(products);
-            data.SetProducts(products);
+
         }
 
         public bool CheckType(string type)

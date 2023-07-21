@@ -28,11 +28,17 @@ namespace Shopping_cart
                         data = null;
                     }
                 }
-                
+                if (subs.Length == 1)
+                {
+                    command = subs[0].Trim();
+                }
+                if (subs.Length == 0)
+                    {
+                        Console.WriteLine("No input");
+                    }
+
             }            
             
-            
-           
         }
         public void ReadFromFile(Data data)
         {
