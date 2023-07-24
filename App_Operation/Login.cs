@@ -18,6 +18,10 @@ namespace Shopping_cart.App_Operation
                     Console.WriteLine("Welcome wallet");
                     data.SetUserType("client");
                     break;
+                case "handyman":
+                    Console.WriteLine("Welcome staff");
+                    data.SetUserType("handyman");
+                    break;
                 default:
                     Console.WriteLine("Incorrect type of user");
                     break;

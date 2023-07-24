@@ -1,5 +1,6 @@
 ﻿using Shopping_cart.App_Operation;
 using Shopping_cart.Cart_Operation;
+using Shopping_cart.Handyman_Operation;
 using Shopping_cart.Interface;
 using Shopping_cart.Product_Operation;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ namespace Shopping_cart
 {
     internal class Data
     {
-        private List<IOperation> _all_operations = new List<IOperation>() { new Add_Cart_Item(), new Checkout(), new Remove_Cart_Item(), new Update_Cart_Item(), new List_Cart_Items(), new List_Product(), new Search_Product(), new Add_Prouduct(), new Edit_Prouduct(), new Remove_Prouduct(), new List_Product(), new Search_Product() , new Login(), new Exit() };
+        private List<IOperation> _all_operations = new List<IOperation>() { new Add_Cart_Item(), new Checkout(), new Remove_Cart_Item(), new Update_Cart_Item(), new List_Cart_Items(), new List_Product(), new Search_Product(), new Add_Prouduct(), new Edit_Prouduct(), new Remove_Prouduct(), new Login(), new Exit(), new Logger_Type(), new Update_Quantity() };
       
         private List<ProductStruct> _products = new List<ProductStruct>();
         private List<CartStruct> _carts = new List<CartStruct>();

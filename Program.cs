@@ -1,8 +1,6 @@
 ﻿using Shopping_cart.App_Operation;
-using Shopping_cart.Interface;
 using Shopping_cart.Product_Operation;
 using System;
-using System.Collections.Generic;
 
 namespace Shopping_cart
 {
@@ -10,28 +8,33 @@ namespace Shopping_cart
     internal class Program
     {
         static bool exitRequested = false;
+        static Data data = new Data();
         static void Main(string[] args)
         {
             Read read = new Read();
-            Data data = new Data();
+            
             Help help = new Help();
-            Save save = new Save();
 
 
             read.ReadFromFile(data);
             string command = null;
             string arguments = null;
-            bool no_command_found=false;
+            bool no_command_found = false;
 
             Console.CancelKeyPress += Console_CancelKeyPress;
             Console.WriteLine("Hello there");
+
             
-            //while ( !exitRequested )
-            //{
-                do
+            do
+            {
+                if (exitRequested == true)
                 {
-
-
+                    break;
+                }
+                else
+                {
+                    no_command_found = false;
+                    command = null; arguments = null;
                     read.ReadFromTerminal(ref command, ref arguments);
                     foreach (IOperation operation in data.GetAllOperation())
                     {
@@ -47,34 +50,40 @@ namespace Shopping_cart
                         help.Bat(data.GetTypeOperations());
                         no_command_found = true;
                     }
-                    if (no_command_found == false)
+                    if (no_command_found == false && command != null)
                     {
                         Console.WriteLine("Wrong input. Either no command with this name or not right user");
                     }
 
+                }
 
-                } while (command != "exit" || !exitRequested);
 
-            //}
-            save.ExportToTextFile(data.GetProducts());
+            } while (command != "exit");
+
+           
+            
 
             Console.WriteLine("Exiting the program...");
-          
+
 
         }
         private static void Console_CancelKeyPress(object sender, ConsoleCancelEventArgs e)
         {
-            e.Cancel = true; // Prevent the default behavior (terminate the application)
+            e.Cancel = false; // Prevent the default behavior (terminate the application)
 
             // Add your custom handling here (optional)
             // For example, you can display a message, ask for confirmation, etc.
-
-            Console.WriteLine("saving....");
             
+            Console.WriteLine("Unexpected exit");
+            Console.WriteLine("saving....");
+            Save save = new Save();
+            save.ExportToTextFile(data.GetProducts());
+            Console.WriteLine("data saved");
+
             // Set the exitRequested flag to true to break out of the while loop in Main()
             exitRequested = true;
         }
-        
+
     }
 
 }

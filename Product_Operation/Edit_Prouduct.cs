@@ -82,10 +82,10 @@ namespace Shopping_cart.Product_Operation
 
                                     case "quantity":
 
-                                        if (int.TryParse(sub[0].Trim(), out int quantity))
+                                        if (int.TryParse(sub[2].Trim(), out int quantity))
                                         {
 
-                                            if ( quantity > 0)
+                                            if ( quantity >= 0)
                                             {
                                                 product.SetQuantity(quantity);
                                             }
@@ -118,7 +118,7 @@ namespace Shopping_cart.Product_Operation
                                         break;
 
                                 }
-
+                                Console.WriteLine("Product is editted");
                                 found_flag = true;
                                 break;
                             }
