@@ -30,9 +30,12 @@ namespace Shopping_cart.Product_Operation
                         i++;
                     }
 
-                    if (!(index == 0 && i == products.Count))
+                    if (found_flag == true)
                     {
                         products.RemoveAt(index);
+
+                        Console.WriteLine("Product remove");
+                        Logger.Log(data, "info", "Product remove");
                     }
 
                     if (found_flag == false)
@@ -52,8 +55,6 @@ namespace Shopping_cart.Product_Operation
                 Save save = new Save();
                 save.ExportToTextFile(products);
                 data.SetProducts(products);
-                Console.WriteLine("Product remove");
-                Logger.Log(data, "info", "Product remove");
 
             }
             else
