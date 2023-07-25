@@ -1,30 +1,84 @@
-﻿using System;
+﻿using Shopping_cart.Logger_Operations;
+using System;
 using System.Collections.Generic;
 
 namespace Shopping_cart.Product_Operation
 {
-    internal class Remove_Prouduct : IOperation, IPruductOperation
+    internal class Remove_Prouduct : IOperation
     {
         string _name = "remove_product";
-        public void Bat(ref List<ProductStruct> list, string data)
+        public void Bat(Data data, string args)
         {
+            Logger.Log(data, "debug", "Enter remove_product");
+
+            bool found_flag =false;
+            List<ProductStruct> products = data.GetProducts();
             int i = 0, index =0;
-            foreach (ProductStruct product in list)
+
+            if (int.TryParse(args.Trim(),out int id))
             {
-                
-                if (product.GetId() == int.Parse(data.Trim()))
+                if (products.Count > 0)
                 {
-                    index = i;
+                    foreach (ProductStruct product in products)
+                    {
+
+                        if (product.GetId() == id)
+                        {
+                            index = i;
+                            found_flag = true;
+                        }
+                        i++;
+                    }
+
+                    if (found_flag == true)
+                    {
+                        products.RemoveAt(index);
+
+                        Console.WriteLine("Product remove");
+                        Logger.Log(data, "info", "Product remove");
+                    }
+
+                    if (found_flag == false)
+                    {
+                        Console.WriteLine("Product is not found");
+                        Logger.Log(data, "info", "Product is not found");
+
+                    }
+
                 }
-                i++;
+                else
+                {
+                    Console.WriteLine("No products");
+                    Logger.Log(data, "warn", "No products");
+
+                }
+                Save save = new Save();
+                save.ExportToTextFile(products);
+                data.SetProducts(products);
+
             }
-            if(!(index == 0 && i == list.Count)) 
+            else
             {
-                list.RemoveAt(index);
+                Console.WriteLine("Parsing failed. The input is not a valid integer.");
+                Logger.Log(data, "error", "Parsing failed. The input is not a valid integer.");
+
             }
-            
-            Save_Prouduct save = new Save_Prouduct();
-            save.ExportToTextFile(list);
+            Logger.Log(data, "debug", "Exit remove_product");
+
+        }
+
+        public bool CheckType(string type)
+        {
+            switch (type)
+            {
+                case "admin":
+                    return true;
+
+                case "client":
+                    return true;
+
+                default: return false;
+            }
         }
 
         public string GetName()
@@ -34,7 +88,7 @@ namespace Shopping_cart.Product_Operation
 
         public string print()
         {
-            return "remove_product - removes a product";
+            return "remove_product( id ) - removes a product";
         }
     }
 }

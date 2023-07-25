@@ -1,46 +1,35 @@
 ﻿using Shopping_cart.App_Operation;
 using Shopping_cart.Interface;
 using Shopping_cart.Product_Operation;
+using System;
 using System.Collections.Generic;
 
 namespace Shopping_cart
 {
-    internal class Admin
+    internal class Admin :  IUser
     {
-        public void Run()
+        public void Run(Data data)
         {
             Read read = new Read();
-            Save_Prouduct save = new Save_Prouduct();
-            Data data = new Data();
             Help help = new Help();
 
-            List<IOperation> admin_operations = data.GetAdminOperation();
-            List<IAppOperation> app_operations = data.GetAppOperation();
-            List<IOperation> all_operations = new List<IOperation>();
-            all_operations.AddRange(admin_operations);
-            List<ProductStruct> products = new List<ProductStruct>();
-            List<CartStruct> carts = new List<CartStruct>();
 
-            read.ReadFromFile(ref products, "C:\\Users\\zlati\\Source\\Repos\\Shopping_cart\\save.txt");
+           
+
+
             string command = null;
-            string info = null;
-
+            string args = null;
+/*
+            Console.WriteLine("Welcome master");
             do
             {
-                read.ReadFromTerminal(ref command, ref info);
-                foreach (IOperation operation in admin_operations)
+                read.ReadFromTerminal(ref command, ref args);
+                foreach (IOperation operation in all_operations)
                 {
                     if (operation.GetName() == command)
                     {
-                        IPruductOperation pruductOperation = (IPruductOperation)operation;
-                        pruductOperation.Bat(ref products, info);
-                    }
-                }
-                foreach (IAppOperation operation in app_operations)
-                {
-                    if (operation.GetName() == command)
-                    {
-                        operation.Bat(info);
+                        operation.Bat(data, args);
+                        break;
                     }
                 }
                 if (help.GetName() == command)
@@ -49,7 +38,7 @@ namespace Shopping_cart
                 }
 
             } while (true);
-
+*/
 
         }
     }

@@ -10,6 +10,7 @@ namespace Shopping_cart
     {
         string print();
         string GetName();
-       
+        void Bat(Data data, string args);
+        bool CheckType(string type);
     }
 }

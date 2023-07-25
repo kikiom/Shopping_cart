@@ -3,17 +3,17 @@ using System.IO;
 
 namespace Shopping_cart.Product_Operation
 {
-    internal class Save_Prouduct
+    internal class Save
     {
         public void ExportToTextFile(List<ProductStruct> data)
         {
-            string FileName = "C:\\Users\\zlati\\Source\\Repos\\Shopping_cart\\save.txt";
+            string FileName = "save.txt";
             using (StreamWriter writer = new StreamWriter(FileName))
             {
 
                 foreach (ProductStruct item in data)
                 {
-                    writer.WriteLine(item.ToString());
+                    writer.WriteLine(item.ToSave());
                 }
 
 

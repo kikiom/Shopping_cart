@@ -60,7 +60,11 @@
         }
         public string ToString()
         {
-            return _id + ";" + _name + ";" + _price + ";" + _quantity + ";" + _description;
+            return "ID: "+ _id + "; Name: " + _name + "; Price: " + _price + "; Quantity: " + _quantity + "; Description: " + _description;
+        }
+        public string ToSave()
+        {
+            return  _id + ";" + _name + ";" + _price + ";" + _quantity + ";" + _description;
         }
     }
 }

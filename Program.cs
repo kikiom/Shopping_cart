@@ -1,54 +1,89 @@
 ﻿using Shopping_cart.App_Operation;
-using Shopping_cart.Interface;
 using Shopping_cart.Product_Operation;
-using System.Collections.Generic;
+using System;
 
 namespace Shopping_cart
 {
 
     internal class Program
     {
-
+        static bool exitRequested = false;
+        static Data data = new Data();
         static void Main(string[] args)
         {
             Read read = new Read();
-            Save_Prouduct save = new Save_Prouduct();
-            Data data = new Data();
+            
             Help help = new Help();
 
-            List<IOperation> admin_operations = data.GetAdminOperation();
-            List<IOperation> client_operations = data.GetClientOperation();
-            List<IAppOperation> app_operations = data.GetAppOperation();
-            List<IOperation> all_operations = new List<IOperation>();
-            all_operations.AddRange(admin_operations);
-            all_operations.AddRange(client_operations);
-            List<ProductStruct> products = new List<ProductStruct>();
-            List<CartStruct>  carts = new List<CartStruct>();
 
-            read.ReadFromFile(ref products, "C:\\Users\\zlati\\Source\\Repos\\Shopping_cart\\save.txt");
+            read.ReadFromFile(data);
             string command = null;
-            string info = null;
+            string arguments = null;
+            bool no_command_found = false;
 
-            do
-            {
-                read.ReadFromTerminal(ref command, ref info);
-                foreach (IAppOperation operation in app_operations)
-                {
-                    if (operation.GetName() == command)
-                    {
-                        operation.Bat(info);
-                    }
-                }
-                if (help.GetName() == command)
-                {
-                    help.Bat(all_operations);
-                }
-
-            } while (true);
+            Console.CancelKeyPress += Console_CancelKeyPress;
+            Console.WriteLine("Hello there");
 
             
+            do
+            {
+                if (exitRequested == true)
+                {
+                    break;
+                }
+                else
+                {
+                    no_command_found = false;
+                    command = null; arguments = null;
+                    read.ReadFromTerminal(ref command, ref arguments);
+                    foreach (IOperation operation in data.GetAllOperation())
+                    {
+                        if (operation.GetName() == command && operation.CheckType(data.GetUserType()) == true)
+                        {
+                            operation.Bat(data, arguments);
+                            no_command_found = true;
+                            break;
+                        }
+                    }
+                    if (help.GetName() == command)
+                    {
+                        help.Bat(data.GetTypeOperations());
+                        no_command_found = true;
+                    }
+                    if (no_command_found == false && command != null)
+                    {
+                        Console.WriteLine("Wrong input. Either no command with this name or not right user");
+                    }
+
+                }
+
+
+            } while (command != "exit");
+
+           
+            
+
+            Console.WriteLine("Exiting the program...");
 
 
         }
+        private static void Console_CancelKeyPress(object sender, ConsoleCancelEventArgs e)
+        {
+            e.Cancel = false; // Prevent the default behavior (terminate the application)
+
+            // Add your custom handling here (optional)
+            // For example, you can display a message, ask for confirmation, etc.
+            
+            Console.WriteLine("Unexpected exit");
+            Console.WriteLine("saving....");
+            Save save = new Save();
+            save.ExportToTextFile(data.GetProducts());
+            Console.WriteLine("data saved");
+
+            // Set the exitRequested flag to true to break out of the while loop in Main()
+            exitRequested = true;
+        }
+
     }
+
 }

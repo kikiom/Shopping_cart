@@ -1,26 +1,56 @@
-﻿using System;
+﻿using Shopping_cart.Logger_Operations;
+using System;
 using System.Collections.Generic;
 
 namespace Shopping_cart.Product_Operation
 {
-    internal class List_Product : IOperation, IPruductOperation
+    internal class List_Product : IOperation
     {
         private string _name = "list_products";
         public string GetName()
         {
             return _name;
         }
-        public void Bat(ref List<ProductStruct> products, string data)
+        public void Bat(Data data, string args)
         {
-            foreach (ProductStruct product in products)
+            Logger.Log(data, "debug", "Enter list_product");
+
+            List<ProductStruct> products = data.GetProducts();
+            if(products != null ) 
             {
-                Console.WriteLine(product.ToString());
+                foreach (ProductStruct product in products)
+                {
+                    Console.WriteLine(product.ToString());
+                }
             }
+            else
+            {
+                Console.WriteLine("No products");
+                Logger.Log(data, "warn", "No product");
+
+            }
+            Logger.Log(data, "debug", "Exit list_product");
+
         }
 
         public string print()
         {
-            return "list_products - shows all products";
+            return "list_products() - shows all products";
+        }
+
+        public bool CheckType(string type)
+        {
+            switch (type)
+            {
+                case "admin":
+                    return true;
+
+                case "client":
+                    return true;
+
+                default: return false;
+            }
+
         }
     }
 }

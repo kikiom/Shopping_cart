@@ -13,22 +13,37 @@ namespace Shopping_cart
         {
             string input = Console.ReadLine();
             char[] separators = new char[] { '(', ')' };
+            if (input != null)
+            {
+                string[] subs = input.Split(separators, StringSplitOptions.RemoveEmptyEntries);
+                if (subs.Length == 2)
+                {
+                    command = subs[0].Trim();
+                    if (subs.Length > 1)
+                    {
+                        data = subs[1];
+                    }
+                    else
+                    {
+                        data = null;
+                    }
+                }
+                if (subs.Length == 1)
+                {
+                    command = subs[0].Trim();
+                }
+                if (subs.Length == 0)
+                    {
+                        Console.WriteLine("No input");
+                    }
 
-            string[] subs = input.Split(separators, StringSplitOptions.RemoveEmptyEntries);
-            command = subs[0].Trim();
-            if (subs.Length > 1 ) 
-            {
-                data = subs[1];
-            }
-            else
-            {
-                data = null;
-            }
+            }            
             
-           
         }
-        public void ReadFromFile(ref List<ProductStruct> products, string filename)
+        public void ReadFromFile(Data data)
         {
+            List<ProductStruct> products = new List<ProductStruct>();
+            string  filename =  "save.txt";
             if (File.Exists(filename))
             {
                 // Create a StreamReader to read from the file
@@ -40,10 +55,11 @@ namespace Shopping_cart
                         char[] separator = { ';' };
                         string[] sub = line.Split(separator, StringSplitOptions.RemoveEmptyEntries);
                         //sub0 = id     sub1 = name     sub2 = price    sub3 = quantity     sub4 = description
-                        products.Add(new ProductStruct(int.Parse(sub[0]), int.Parse(sub[3]), double.Parse(sub[2]), sub[1], sub[4]));
+                        products.Add(new ProductStruct(int.Parse(sub[0].Trim()), int.Parse(sub[3].Trim()), double.Parse(sub[2].Trim()), sub[1].Trim(), sub[4].Trim()));
                     }
                 }
             }
+            data.SetProducts(products);
         }
     }
 }

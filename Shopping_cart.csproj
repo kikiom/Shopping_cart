@@ -61,7 +61,11 @@
     <Compile Include="Admin.cs" />
     <Compile Include="App_Operation\Exit.cs" />
     <Compile Include="App_Operation\Help.cs" />
+    <Compile Include="Logger_Operations\Logger_Type.cs" />
     <Compile Include="App_Operation\Login.cs" />
+    <Compile Include="Handyman_Operation\Update_quantity.cs" />
+    <Compile Include="Interface\IUser.cs" />
+    <Compile Include="Logger_Operations\Logger.cs" />
     <Compile Include="Structs\CartStruct.cs" />
     <Compile Include="Cart_Operation\Add_Cart_Item.cs" />
     <Compile Include="Cart_Operation\Checkout.cs" />
@@ -79,7 +83,7 @@
     <Compile Include="Interface\IPruductOperation.cs" />
     <Compile Include="Product_Operation\List_Product.cs" />
     <Compile Include="Product_Operation\Remove_Prouduct.cs" />
-    <Compile Include="Product_Operation\Save_Prouduct.cs" />
+    <Compile Include="Product_Operation\Save.cs" />
     <Compile Include="Product_Operation\Search_Product.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

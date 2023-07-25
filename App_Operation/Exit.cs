@@ -1,24 +1,29 @@
-﻿using Shopping_cart.Interface;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System;
 
 namespace Shopping_cart.App_Operation
 {
-    internal class Exit : IAppOperation 
+    internal class Exit : IOperation
     {
         private string _name = "exit";
 
-        public void Bat(string data)
+        public void Bat(Data data, string args)
         {
-            System.Environment.Exit(0);
+            Console.WriteLine("bye");
+        }
+
+        public bool CheckType(string type)
+        {
+            return true;
         }
 
         public string GetName()
         {
             return _name;
+        }
+
+        public string print()
+        {
+            return "exit () - exits the program";
         }
     }
 }

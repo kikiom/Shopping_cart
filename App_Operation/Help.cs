@@ -20,8 +20,6 @@ namespace Shopping_cart.App_Operation
                 help = help + "\n";
 
             }
-            help = help + "login - logs in a user\n" +
-                "exit - close the program\n";
             Console.Write(help);
         }
 

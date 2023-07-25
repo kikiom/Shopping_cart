@@ -42,7 +42,7 @@ namespace Shopping_cart
         }
         public string ToString()
         {
-            return _id + " " + _quantity ;
+            return "ID item cart: " + _id + "; Quantity: " + _quantity ;
         }
     }
 }

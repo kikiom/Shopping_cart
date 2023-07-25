@@ -1,38 +1,196 @@
-﻿using System;
+﻿using Shopping_cart.Logger_Operations;
+using System;
 using System.Collections.Generic;
 
 namespace Shopping_cart.Product_Operation
 {
-    internal class Edit_Prouduct : IOperation, IPruductOperation
+    internal class Edit_Prouduct : IOperation
     {
         private string _name = "edit_product";
         public string GetName()
         {
             return _name;
         }
-        public void Bat(ref List<ProductStruct> products, string data)
+        public void Bat(Data data, string args)
         {
+            Logger.Log(data, "debug", "Enter edit_product");
+
+            bool found_flag = false;
+            List<ProductStruct> products = data.GetProducts();
+
             char[] separator = { ';' };
-            string[] sub = data.Split(separator, StringSplitOptions.RemoveEmptyEntries);
-            //sub0 = id     sub1 = name     sub2 = price    sub3 = quantity     sub4 = description
-            int id = int.Parse(sub[0].Trim());
-            foreach (ProductStruct product in products)
+            string[] sub = args.Split(separator, StringSplitOptions.RemoveEmptyEntries);
+            //sub0 = id     sub1 = field_name     sub2 = info
+
+
+            if (sub.Length == 3)
             {
-                if (product.GetId() == id)
+                bool parse_id_flag = false;
+                bool parse_info_flag = false;
+                int id_product = 0;
+                string field_name = sub[1].Trim();
+
+                if (int.TryParse(sub[0].Trim(), out int parsed_id))
                 {
-                    product.SetName(sub[1].Trim());
-                    product.SetPrice(double.Parse(sub[2].Trim()));
-                    product.SetQuantity(int.Parse(sub[3].Trim()));
-                    product.SetDescription(sub[4].Trim());
+                    id_product = parsed_id;
+                    parse_id_flag = true;
+                }
+                else
+                {
+                    Console.WriteLine("Parsing failed. The input is not a valid integer.");
+                    Logger.Log(data, "error", "Parsing failed. The input is not a valid integer.");
+
+                }
+
+                if (parse_id_flag == true)
+                {
+
+                    if (products.Count > 0)
+                    {
+
+                        foreach (ProductStruct product in products)
+                        {
+
+                            if (product.GetId() == id_product)
+                            {
+
+                                switch (field_name)
+                                {
+
+                                    case "name":
+
+                                        product.SetName(sub[2].Trim());
+                                        break;
+
+                                    case "price":
+
+                                        if (double.TryParse(sub[2].Trim(), out double price))
+                                        {
+
+                                            if (price >= 0)
+                                            {
+                                                product.SetPrice(price);
+                                            }
+                                            else
+                                            {
+                                                Console.WriteLine("Wrong input price");
+                                                Logger.Log(data, "warn", "Wrong input price");
+
+                                            }
+
+                                        }
+                                        else
+                                        {
+                                            Console.WriteLine("Parsing failed. The input is not a valid integer.");
+                                            Logger.Log(data, "error", "Parsing failed. The input is not a valid integer.");
+
+                                        }
+
+
+                                        break;
+
+                                    case "quantity":
+
+                                        if (int.TryParse(sub[2].Trim(), out int quantity))
+                                        {
+
+                                            if ( quantity >= 0)
+                                            {
+                                                product.SetQuantity(quantity);
+                                            }
+                                            /*else if (int.Parse(sub[2].Trim()) == 0)
+                                            {
+                                                IOperation delete = new Remove_Prouduct();
+                                                delete.Bat(data, id.ToString());
+                                            }*/
+                                            else
+                                            {
+                                                Console.WriteLine("Wrong input quantity");
+                                                Logger.Log(data, "warn", "Wrong input quantity");
+
+                                            }
+
+                                        }
+                                        else
+                                        {
+                                            Console.WriteLine("Parsing failed. The input is not a valid integer.");
+                                            Logger.Log(data, "error", "Parsing failed. The input is not a valid integer.");
+
+                                        }
+
+                                        break;
+
+                                    case "description":
+
+                                        product.SetDescription(sub[2].Trim());
+                                        break;
+
+                                    default:
+
+                                        Console.WriteLine("incorect field name");
+                                        Logger.Log(data, "error", "Incorect field name in edit_product");
+
+                                        break;
+
+                                }
+                                Console.WriteLine("Product is editted");
+                                Logger.Log(data, "info", "Product is editted");
+
+                                found_flag = true;
+                                break;
+                            }
+
+                        }
+
+                        if (found_flag == false)
+                        {
+                            Console.WriteLine("Product is not found");
+                            Logger.Log(data, "info", "Product is not found");
+
+                        }
+
+                    }
+                    else
+                    {
+                        Console.WriteLine("No products");
+                        Logger.Log(data, "warn", "No products");
+                    }
+
+                    Save save = new Save();
+                    save.ExportToTextFile(products);
+                    data.SetProducts(products);
+
+                }
+                else
+                {
+                    Logger.Log(data, "warn", "One parse has failed in add_product");
+
                 }
             }
-            Save_Prouduct save = new Save_Prouduct();
-            save.ExportToTextFile(products);
-        }
-        public string print()
-        {
-            return "edit_product - eidt the specified product";
+            else 
+            { 
+                Console.WriteLine("Not enough arguments");
+                Logger.Log(data, "error", "Not enough arguments");
+
+            }
+            Logger.Log(data, "debug", "Exit edit_product");
+
         }
 
+        public string print()
+        {
+            return "edit_product( id ; feild ; new data) - eidt the specified product";
+        }
+
+        public bool CheckType(string type)
+        {
+            switch (type)
+            {
+                case "admin":
+                    return true;
+
+                default: return false;
+            }
+        }
     }
 }
