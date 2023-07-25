@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Shopping_cart.Logger_Operations;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -43,6 +44,7 @@ namespace Shopping_cart.Product_Operation
                 }
                 else
                 {
+                    Logger.Log(data, "error", "Parsing failed. The input is not a valid integer.");
                     Console.WriteLine("Parsing failed. The input is not a valid integer.");
                 }
                 

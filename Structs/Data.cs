@@ -2,6 +2,7 @@
 using Shopping_cart.Cart_Operation;
 using Shopping_cart.Handyman_Operation;
 using Shopping_cart.Interface;
+using Shopping_cart.Logger_Operations;
 using Shopping_cart.Product_Operation;
 using System.Collections.Generic;
 
