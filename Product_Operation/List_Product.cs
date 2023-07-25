@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Shopping_cart.Logger_Operations;
+using System;
 using System.Collections.Generic;
 
 namespace Shopping_cart.Product_Operation
@@ -12,6 +13,8 @@ namespace Shopping_cart.Product_Operation
         }
         public void Bat(Data data, string args)
         {
+            Logger.Log(data, "debug", "Enter list_product");
+
             List<ProductStruct> products = data.GetProducts();
             if(products != null ) 
             {
@@ -23,7 +26,11 @@ namespace Shopping_cart.Product_Operation
             else
             {
                 Console.WriteLine("No products");
+                Logger.Log(data, "warn", "No product");
+
             }
+            Logger.Log(data, "debug", "Exit list_product");
+
         }
 
         public string print()

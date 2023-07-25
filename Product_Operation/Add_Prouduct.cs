@@ -23,6 +23,7 @@ namespace Shopping_cart.Product_Operation
 
         public void Bat(Data data, string args)
         {
+            Logger.Log(data, "debug", "Enter add_product");
             List<ProductStruct> products;
             products = data.GetProducts();
 
@@ -56,6 +57,7 @@ namespace Shopping_cart.Product_Operation
                 else
                 {
                     Console.WriteLine("Parsing failed. The input is not a valid double.");
+                    Logger.Log(data, "error", "Parsing failed. The input is not a valid double.");
                 }
 
                 if (parse_price_flag == true && parse_quantity_flag == true)
@@ -66,6 +68,7 @@ namespace Shopping_cart.Product_Operation
                         if (price == product.GetPrice() && sub[0].Trim() == product.GetName() && sub[3].Trim() == product.GetDescription())
                         {
                             Console.WriteLine("Already exist. Use edit_product ");
+                            Logger.Log(data, "warn", "Already exist. Use edit_product ");
                         }
                         else
                         {
@@ -88,15 +91,28 @@ namespace Shopping_cart.Product_Operation
                                 data.SetProducts(products);
                                 Save save = new Save();
                                 save.ExportToTextFile(products);
-                                Console.WriteLine("Product added");
+                                Console.WriteLine("Product added " +new_product.ToString());
+                                Logger.Log(data, "info", "Product added");
+
                             }
 
                         }
                     }
 
                 }
+                else
+                {
+                    Logger.Log(data, "warn", "One parse has failed in add_product");
+
+                }
             }
-            
+            else
+            {
+                Console.WriteLine("Not enough arguments");
+                Logger.Log(data, "error", "Not enough arguments");
+            }
+            Logger.Log(data, "debug", "Exit add_product");
+
         }
 
         public bool CheckType(string type)

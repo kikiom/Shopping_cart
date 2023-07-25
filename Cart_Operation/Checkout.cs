@@ -1,4 +1,5 @@
 ﻿using Shopping_cart.Interface;
+using Shopping_cart.Logger_Operations;
 using Shopping_cart.Product_Operation;
 using System;
 using System.Collections.Generic;
@@ -14,6 +15,8 @@ namespace Shopping_cart.Cart_Operation
         private string _name = "checkout";
         public void Bat(Data data, string args)
         {
+            Logger.Log(data, "debug", "Enter checkout");
+
             List<CartStruct> cart_items = data.GetCarts();
             List<ProductStruct> products = data.GetProducts();
             List<ProductStruct> to_be_remove = new List<ProductStruct>();
@@ -60,11 +63,14 @@ namespace Shopping_cart.Cart_Operation
                 cart_items.Clear();
                 data.SetCarts(cart_items);
                 data.SetProducts(products);
+                Logger.Log(data, "info", "Checkout is complete");
             }
             else
             {
                 Console.WriteLine("No products in the cart");
+                Logger.Log(data, "warn", "No products in the cart");
             }
+            Logger.Log(data, "debug", "Exit checkout");
         }
 
         public bool CheckType(string type)

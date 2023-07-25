@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Shopping_cart.Logger_Operations;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -9,6 +10,8 @@ namespace Shopping_cart.Cart_Operation
         private string _name = "add_cart_item";
         public void Bat(Data data, string args)
         {
+            Logger.Log(data, "debug", "Enter search_product");
+
             List<CartStruct> cart_items = data.GetCarts();
             List<ProductStruct> products = data.GetProducts();
 
@@ -18,6 +21,7 @@ namespace Shopping_cart.Cart_Operation
             char[] separator = { ';' };
             string[] sub = args.Split(separator, StringSplitOptions.RemoveEmptyEntries);
             //sub0 = id_product    sub1 = quantity 
+
             if (sub.Length == 2)
             {
                 bool parse_id_flag = false;
@@ -31,6 +35,7 @@ namespace Shopping_cart.Cart_Operation
                 else
                 {
                     Console.WriteLine("Parsing failed. The input is not a valid integer.");
+                    Logger.Log(data, "error", "Parsing failed. The input is not a valid integer.");
                 }
                 if (int.TryParse(sub[1].Trim(), out int parsed_quantity))
                 {
@@ -40,6 +45,7 @@ namespace Shopping_cart.Cart_Operation
                 else
                 {
                     Console.WriteLine("Parsing failed. The input is not a valid integer.");
+                    Logger.Log(data, "error", "Parsing failed. The input is not a valid integer.");
                 }
                 if (parse_id_flag == true && parse_quantity_flag == true)
                 {
@@ -63,10 +69,12 @@ namespace Shopping_cart.Cart_Operation
                                 {
                                     cart_item.SetQuantity(quantity + cart_item.GetQuantity());
                                     Console.WriteLine("item added to cart");
+                                    Logger.Log(data, "info", "Item added to cart");
                                 }
                                 else
                                 {
                                     Console.WriteLine("not enough quantity");
+                                    Logger.Log(data, "warn", "Not enough quantity");
                                 }
                                 item_added_flag = true;
                             }
@@ -77,14 +85,17 @@ namespace Shopping_cart.Cart_Operation
                             {
                                 cart_items.Add(new CartStruct(id_item, quantity, product.GetId()));
                                 Console.WriteLine("item added to cart");
+                                Logger.Log(data, "info", "Item added to cart");
                             }
                             else if (found_product_flag == true)
                             {
                                 Console.WriteLine("not enough quantity");
+                                Logger.Log(data, "warn", "Not enough quantity");
                             }
                             if (found_product_flag == false)
                             {
                                 Console.WriteLine("No product with this id");
+                                Logger.Log(data, "warn", "No product with this id");
                             }
                         }
 
@@ -94,12 +105,21 @@ namespace Shopping_cart.Cart_Operation
                     else
                     {
                         Console.WriteLine("No products");
+                        Logger.Log(data, "warn", "No products");
                     }
                 }
+                else
+                {
+                    Logger.Log(data, "warn", "One parse has failed in add_product");
 
+                }
             }
-
-
+            else
+            {
+                Console.WriteLine("Not enough arguments");
+                Logger.Log(data, "error", "Not enough arguments");
+            }
+            Logger.Log(data, "debug", "Exit add_cart_item");
         }
 
         public bool CheckType(string type)
