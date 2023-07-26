@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Shopping_cart.Product_Operation
 {
-    internal class Edit_Prouduct : IOperation
+    public class Edit_Prouduct : IOperation
     {
         private string _name = "edit_product";
         public string GetName()

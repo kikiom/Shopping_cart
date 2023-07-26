@@ -3,7 +3,7 @@ using System;
 
 namespace Shopping_cart.App_Operation
 {
-    internal class Login : IOperation
+    public class Login : IOperation
     {
         private string _name = "login";
         public void Bat(Data data, string args)

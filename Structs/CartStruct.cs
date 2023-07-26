@@ -7,7 +7,7 @@ using System.Xml.Linq;
 
 namespace Shopping_cart
 {
-    internal class CartStruct
+    public class CartStruct
     {
         private int _id;
         private int _quantity;

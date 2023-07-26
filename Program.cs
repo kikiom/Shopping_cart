@@ -5,8 +5,9 @@ using System;
 namespace Shopping_cart
 {
 
-    internal class Program
+    public class Program
     {
+
         static bool exitRequested = false;
         static Data data = new Data();
         static void Main(string[] args)

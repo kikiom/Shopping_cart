@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Shopping_cart.Cart_Operation
 {
-    internal class Remove_Cart_Item : IOperation
+    public class Remove_Cart_Item : IOperation
     {
         private string _name = "remove_cart_item";
 

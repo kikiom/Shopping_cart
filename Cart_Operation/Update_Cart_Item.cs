@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Shopping_cart.Cart_Operation
 {
-    internal class Update_Cart_Item : IOperation
+    public class Update_Cart_Item : IOperation
     {
         private string _name = "update_cart_item";
         public void Bat(Data data, string args)

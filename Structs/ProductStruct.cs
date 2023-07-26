@@ -1,6 +1,6 @@
 ﻿namespace Shopping_cart
 {
-    internal class ProductStruct
+    public class ProductStruct
     {
         private string _name;
         private string _description;

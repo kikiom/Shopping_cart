@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Shopping_cart.Interface
 {
-    internal interface IAppOperation
+    public interface IAppOperation
     {
         string GetName();
         void Bat(string data);

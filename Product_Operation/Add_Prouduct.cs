@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace Shopping_cart.Product_Operation
 {
-    internal class Add_Prouduct : IOperation
+    public class Add_Prouduct : IOperation
     {
         private string _name = "add_product";
         public string GetName()

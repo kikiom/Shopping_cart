@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Shopping_cart.Logger_Operations
 {
-    internal class Logger_Type : IOperation
+    public class Logger_Type : IOperation
     {
         private string _name = "logger_type";
         public void Bat(Data data, string args)

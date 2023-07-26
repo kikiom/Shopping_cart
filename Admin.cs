@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace Shopping_cart
 {
-    internal class Admin :  IUser
+    public class Admin :  IUser
     {
         public void Run(Data data)
         {

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Shopping_cart
 {
-    internal class Read
+    public class Read
     {
         public void ReadFromTerminal(ref string command, ref string data) 
         {

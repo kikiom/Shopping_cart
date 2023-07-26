@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Shopping_cart
 {
-    internal interface IOperation
+    public interface IOperation
     {
         string print();
         string GetName();

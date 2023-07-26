@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Shopping_cart
 {
-    internal class Client : IUser
+    public class Client : IUser
     {
         public void Run(Data data)
         {
