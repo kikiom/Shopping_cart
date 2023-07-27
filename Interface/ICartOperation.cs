@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Shopping_cart.Interface
 {
-    internal interface ICartOperation
+    public interface ICartOperation
     {
         void Bat(ref List<CartStruct> cart_items, List<ProductStruct> products, string data);
     }

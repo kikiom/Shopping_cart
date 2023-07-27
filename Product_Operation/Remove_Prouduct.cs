@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Shopping_cart.Product_Operation
 {
-    internal class Remove_Prouduct : IOperation
+    public class Remove_Prouduct : IOperation
     {
         string _name = "remove_product";
         public void Bat(Data data, string args)

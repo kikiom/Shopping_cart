@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace Shopping_cart.Handyman_Operation
 {
-    internal class Update_Quantity : IOperation
+    public class Update_Quantity : IOperation
     {
         private string _name = "update_quantity";
         public void Bat(Data data, string args)

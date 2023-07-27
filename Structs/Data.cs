@@ -8,7 +8,7 @@ using System.Collections.Generic;
 
 namespace Shopping_cart
 {
-    internal class Data
+    public class Data
     {
         private List<IOperation> _all_operations = new List<IOperation>() { new Add_Cart_Item(), new Checkout(), new Remove_Cart_Item(), new Update_Cart_Item(), new List_Cart_Items(), new List_Product(), new Search_Product(), new Add_Prouduct(), new Edit_Prouduct(), new Remove_Prouduct(), new Login(), new Exit(), new Logger_Type(), new Update_Quantity() };
       
@@ -51,7 +51,7 @@ namespace Shopping_cart
             }
             return type_operations;
         }
-        public void SetClientOperation(List<IOperation> operations)
+        public void SetAllOperation(List<IOperation> operations)
         {
             _all_operations = operations;
         }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Shopping_cart.App_Operation
 {
-    internal class Help 
+    public class Help 
     {
         private string _name = "help";
 

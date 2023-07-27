@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace Shopping_cart.Cart_Operation
 {
-    internal class Add_Cart_Item : IOperation
+    public class Add_Cart_Item : IOperation
     {
         private string _name = "add_cart_item";
         public void Bat(Data data, string args)

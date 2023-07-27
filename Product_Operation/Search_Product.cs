@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Shopping_cart.Product_Operation
 {
-    internal class Search_Product : IOperation
+    public class Search_Product : IOperation
     {
         private string _name = "search_product";
         public string GetName() 

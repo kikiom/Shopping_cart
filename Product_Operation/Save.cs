@@ -3,7 +3,7 @@ using System.IO;
 
 namespace Shopping_cart.Product_Operation
 {
-    internal class Save
+    public class Save
     {
         public void ExportToTextFile(List<ProductStruct> data)
         {

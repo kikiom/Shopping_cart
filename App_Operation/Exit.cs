@@ -2,7 +2,7 @@
 
 namespace Shopping_cart.App_Operation
 {
-    internal class Exit : IOperation
+    public class Exit : IOperation
     {
         private string _name = "exit";
 

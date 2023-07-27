@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Shopping_cart.Interface
 {
-    internal interface IUser
+    public interface IUser
     {
         void Run(Data data);
     }
