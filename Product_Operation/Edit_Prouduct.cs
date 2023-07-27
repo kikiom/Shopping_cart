@@ -60,6 +60,8 @@ namespace Shopping_cart.Product_Operation
                                     case "name":
 
                                         product.SetName(sub[2].Trim());
+                                        Console.WriteLine("Product is editted");
+                                        Logger.Log(data, "info", "Product is editted");
                                         break;
 
                                     case "price":
@@ -70,6 +72,8 @@ namespace Shopping_cart.Product_Operation
                                             if (price >= 0)
                                             {
                                                 product.SetPrice(price);
+                                                Console.WriteLine("Product is editted");
+                                                Logger.Log(data, "info", "Product is editted");
                                             }
                                             else
                                             {
@@ -97,6 +101,8 @@ namespace Shopping_cart.Product_Operation
                                             if ( quantity >= 0)
                                             {
                                                 product.SetQuantity(quantity);
+                                                Console.WriteLine("Product is editted");
+                                                Logger.Log(data, "info", "Product is editted");
                                             }
                                             /*else if (int.Parse(sub[2].Trim()) == 0)
                                             {
@@ -123,6 +129,8 @@ namespace Shopping_cart.Product_Operation
                                     case "description":
 
                                         product.SetDescription(sub[2].Trim());
+                                        Console.WriteLine("Product is editted");
+                                        Logger.Log(data, "info", "Product is editted");
                                         break;
 
                                     default:
@@ -133,8 +141,7 @@ namespace Shopping_cart.Product_Operation
                                         break;
 
                                 }
-                                Console.WriteLine("Product is editted");
-                                Logger.Log(data, "info", "Product is editted");
+                                
 
                                 found_flag = true;
                                 break;

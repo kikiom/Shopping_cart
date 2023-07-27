@@ -58,7 +58,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Admin.cs" />
     <Compile Include="App_Operation\Exit.cs" />
     <Compile Include="App_Operation\Help.cs" />
     <Compile Include="Logger_Operations\Logger_Type.cs" />
@@ -72,7 +71,6 @@
     <Compile Include="Cart_Operation\List_Cart_Items.cs" />
     <Compile Include="Cart_Operation\Remove_Cart_Item.cs" />
     <Compile Include="Cart_Operation\Update_Cart_Item.cs" />
-    <Compile Include="Client.cs" />
     <Compile Include="Structs\Data.cs" />
     <Compile Include="Interface\IAppOperation.cs" />
     <Compile Include="Interface\ICartOperation.cs" />
